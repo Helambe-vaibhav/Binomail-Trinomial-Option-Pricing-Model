@@ -9,13 +9,13 @@ The Trinomial model is an extension of the Binomial model that introduces a thir
 # Usage
 To use these models for options pricing, you typically need to provide the following input parameters:
 
--Current Asset Price (S): The price of the underlying asset at the beginning.
--Strike Price (K): The pre-agreed price at which the option can be exercised.
--Risk-free Rate (r): The interest rate assumed to have no default risk.
--Time to Expiration (T): The time remaining until the option's expiration.
--Price Movement Factors (u and d): Parameters determining the upward and downward movements in the asset's price.
--Number of Steps (n or m): The number of time steps in the Binomial or Trinomial tree.
--Using these parameters, the models calculate the option price based on the chosen option type (call or put) and the specified model (Binomial or Trinomial).
+ Current Asset Price (S): The price of the underlying asset at the beginning.
+ Strike Price (K): The pre-agreed price at which the option can be exercised.
+ Risk-free Rate (r): The interest rate assumed to have no default risk.
+ Time to Expiration (T): The time remaining until the option's expiration.
+ Price Movement Factors (u and d): Parameters determining the upward and downward movements in the asset's price.
+ Number of Steps (n or m): The number of time steps in the Binomial or Trinomial tree.
+ Using these parameters, the models calculate the option price based on the chosen option type (call or put) and the specified model (Binomial or Trinomial).
 
 # Conclusion
 Both the Binomial and Trinomial models offer valuable insights into options pricing by simulating potential asset price movements over time. They serve as foundational concepts in quantitative finance and are fundamental to more sophisticated models used in derivatives pricing.
