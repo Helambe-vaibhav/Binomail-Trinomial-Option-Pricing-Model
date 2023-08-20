@@ -32,3 +32,5 @@ Using these parameters, the models calculate the option price based on the chose
 ## Conclusion
 
 Both the Binomial and Trinomial models offer valuable insights into options pricing by simulating potential asset price movements over time. They serve as foundational concepts in quantitative finance and are fundamental to more sophisticated models used in derivatives pricing.
+
+**Disclaimer:** This script is provided for educational and informational purposes only. Options trading involves risks, and this script is not intended as financial advice. Use it at your own risk and make informed decisions when trading options.
