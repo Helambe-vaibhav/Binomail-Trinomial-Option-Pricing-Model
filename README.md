@@ -22,10 +22,11 @@ The **Binomial Option Pricing Model (CRR Model)** assumes that an asset price ca
 **Key Formulas:**
 
 - Upward Factor: \(u = e^{\sigma \sqrt{\Delta t}}\)
-- Downward Factor: \(d = \frac{1}{u}\)
+- Downward Facto\(V = e^{-r \Delta t} (p V_{up} + (1 - p) V_{down})\)r: \(d = \frac{1}{u}\)
 - Risk-Neutral Probability: \(p = \frac{e^{(r - q) \Delta t} - d}{u - d}\)
-- Option Value at Each Node: \(V = e^{-r \Delta t} (p V_{up} + (1 - p) V_{down})\)
+- Option Value at Each Node:&#x20;
 -
+
 The **Binomial Option Pricing Model** follows a **recombining tree structure**:
 
 1. **Define Time Steps:** The option's time to maturity is divided into small intervals.
