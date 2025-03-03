@@ -1,24 +1,47 @@
-# 📈 Precision Pricing: Binomial & Trinomial Option Models
+# 📊 Options Pricing using Binomial and Trinomial Models
 
-## 📌 Overview
+## Overview
 
-This repository provides an in-depth analysis of **options pricing** using the **Binomial and Trinomial models**—two widely used techniques in **quantitative finance**. These models help estimate option values by simulating potential price movements of an asset over time, allowing traders and analysts to make informed decisions.
+This repository provides a comprehensive implementation of **options pricing** using the **Binomial** and **Trinomial tree models**. These models are fundamental tools in quantitative finance for estimating the fair value of options by simulating asset price movements over time.
 
-- The **Binomial Model** assumes an asset price can move **up or down** in each time step, forming a discrete-time **binomial tree**.
-- The **Trinomial Model** extends this approach by introducing a **third possible outcome**, creating a more refined and accurate pricing structure.
+### Why These Models?
 
-Both models are fundamental in derivative pricing and serve as the building blocks for more sophisticated options pricing models.
+- The Binomial Model assumes an asset price can move up or down in each time step, forming a discrete-time binomial tree.
+- The **Trinomial model** extends this concept by incorporating a middle state, improving accuracy and stability.
+
+Both models allow pricing for **European, American, and Bermudan options** while considering factors like volatility, risk-free rate, and dividends.
 
 ---
 
-## ⚡ Binomial Model: Step-by-Step Breakdown
+## 📊 Binomial Tree Model
 
+### 🔬 Model Description
+
+The **Binomial Option Pricing Model (CRR Model)** assumes that an asset price can either increase (**up factor, u**) or decrease (**down factor, d**) at each time step. The option price is determined using a **backward induction approach**.
+
+**Key Formulas:**
+
+- Upward Factor: \(u = e^{\sigma \sqrt{\Delta t}}\)
+- Downward Factor: \(d = \frac{1}{u}\)
+- Risk-Neutral Probability: \(p = \frac{e^{(r - q) \Delta t} - d}{u - d}\)
+- Option Value at Each Node: \(V = e^{-r \Delta t} (p V_{up} + (1 - p) V_{down})\)
+-
 The **Binomial Option Pricing Model** follows a **recombining tree structure**:
 
 1. **Define Time Steps:** The option's time to maturity is divided into small intervals.
 2. **Calculate Up and Down Factors:** The asset price moves up (**u**) or down (**d**) at each step.
 3. **Compute Option Payoffs:** Start at the final step and work **backward through the tree**.
 4. **Discount Future Payoffs:** Use the **risk-free rate** to determine the present value of future payoffs.
+
+### 📊 Implementation
+
+We implemented the **Cox-Ross-Rubinstein (CRR)** binomial model with support for **European, American, and Bermudan** options.
+
+```python
+# Example Usage for Binomial Model
+Eur_call_result = CRR(n=1000, S=100, K=100, r=0.03, v=0.20, q=0.07, t=3, l=500, PutCall="C", OpStyle='E')
+print(f"European Call Option Price: {Eur_call_result}")
+```
 
 🔹 **Strengths:**
 
@@ -32,13 +55,11 @@ The **Binomial Option Pricing Model** follows a **recombining tree structure**:
 
 ---
 
-## ⚡ Trinomial Model: A More Granular Approach
+## 📊 Trinomial Tree Model
 
-The **Trinomial Option Pricing Model** is an extension of the **Binomial model**, introducing a **third possible state**:
+### 🔬 Model Description
 
-- **Upward movement (u)**
-- **Downward movement (d)**
-- **No movement (m)** (a stable middle price)
+The **Trinomial Option Pricing Model** extends the binomial approach by introducing an additional state (**middle movement**), making it more accurate for **longer-dated options** and highly volatile markets.
 
 📌 **Why use the Trinomial Model?**
 
@@ -46,26 +67,38 @@ The **Trinomial Option Pricing Model** is an extension of the **Binomial model**
 - Provides better handling of **high volatility scenarios**.
 - Converges faster than the Binomial model for **longer expiration periods**.
 
----
+**Key Formulas:**
 
-## 🛠️ How to Use
+- Upward Factor: \(u = e^{\sigma \sqrt{2\Delta t}}\)
+- Downward Factor: \(d = e^{-\sigma \sqrt{2\Delta t}}\)
+- Risk-Neutral Probabilities:
+  - \(p_u = \left( \frac{e^{(b \Delta t /2)} - e^{-\sigma \sqrt{\Delta t/2}}}{e^{\sigma \sqrt{\Delta t/2}} - e^{-\sigma \sqrt{\Delta t/2}}} \right)^2\)
+  - \(p_d = \left( \frac{e^{\sigma \sqrt{\Delta t/2}} - e^{(b \Delta t /2)}}{e^{\sigma \sqrt{\Delta t/2}} - e^{-\sigma \sqrt{\Delta t/2}}} \right)^2\)
+  - \(p_m = 1 - p_u - p_d\)
 
-To compute option prices using these models, the following **input parameters** are required:
+### 📊 Implementation
 
-- **S (Current Asset Price)**: The price of the underlying asset.
-- **K (Strike Price)**: The agreed price for option execution.
-- **r (Risk-free Rate)**: The theoretical return on a risk-free investment.
-- **T (Time to Expiration)**: The duration before the option expires.
-- **u & d (Price Movement Factors)**: Determine how much the price moves per step.
-- **n or m (Steps in the Model)**: The number of time intervals in the tree.
+The **Trinomial Model** supports both **American and European** options.
 
-### 🚀 Running the Code
-
-```bash
-python options_pricing.py  # Replace with actual script name
+```python
+# Example Usage for Trinomial Model
+option_price, u, d, pu, pd, pm = TrinomialTreeOption(AmeEurFlag="a", CallPutFlag="c", S=100, X=100, Time=3, r=0.03, b=-0.04, sigma=0.2, n=9)
+print(f"Trinomial American Call Option Price: {option_price}")
 ```
 
 ---
+
+## 🌟 Comparison: Binomial vs. Trinomial Models
+
+| Feature          | Binomial Model     | Trinomial Model                    |
+| ---------------- | ------------------ | ---------------------------------- |
+| Price Movements  | Up, Down           | Up, Down, Middle                   |
+| Accuracy         | Moderate           | Higher                             |
+| Computation Time | Faster             | Slightly Slower                    |
+| Use Case         | Short-term options | Long-term options, high volatility |
+
+---
+
 
 ## 📊 Conclusion
 
@@ -80,12 +113,14 @@ These models are **crucial in quantitative finance**, forming the foundation for
 - Academic research and financial modeling.
 
 ---
+📈 **Skills Used:** Python, Options Pricing, Quantitative Finance, Numerical Methods, Risk Management, Data Visualization.
+
+---
 
 ## ⚠️ Disclaimer
 
 This project is for **educational purposes only** and should not be considered financial advice. Options trading involves risk, and users should conduct their own research before making investment decisions.
 
 📌 **Feel free to contribute or discuss improvements!** 🚀
-
 
 
