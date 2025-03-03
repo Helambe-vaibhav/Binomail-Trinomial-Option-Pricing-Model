@@ -1,4 +1,4 @@
-# 📈 Options Pricing using Binomial and Trinomial Models
+# 📈 Precision Pricing: Binomial & Trinomial Option Models
 
 ## 📌 Overview
 
